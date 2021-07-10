@@ -1,8 +1,10 @@
 package uk.co.tmdavies.testrpg;
 
-import uk.co.tmdavies.testrpg.objects.Battle;
-import uk.co.tmdavies.testrpg.objects.Mob;
-import uk.co.tmdavies.testrpg.objects.Player;
+import uk.co.tmdavies.testrpg.adventure.Adventure;
+import uk.co.tmdavies.testrpg.battles.Battle;
+import uk.co.tmdavies.testrpg.battles.TutorialBattle;
+import uk.co.tmdavies.testrpg.mobs.Mob;
+import uk.co.tmdavies.testrpg.player.Player;
 
 import java.util.*;
 
@@ -43,6 +45,8 @@ public class Main {
 
 		Main.scrollScreen(500, statValues.toArray(new String[0]));
 
+		Main.waitSec();
+
 		Main.clearScreen();
 
 		System.out.println("Loading Game...");
@@ -53,7 +57,13 @@ public class Main {
 
 		Main.clearScreen();
 
-		Main.startBattle();
+		Main.startTutorial();
+
+		while (true) {
+
+			Main.adventureStart();
+
+		}
 
 	}
 
@@ -87,23 +97,41 @@ public class Main {
 
 	}
 
-	public static void startBattle() {
+	public static void startTutorial() {
 
-		Mob.MobEntity entity = Main.mob.getMobEntity();
+		Mob.MobEntity entity = Mob.MobEntity.TEST;
+
+		Main.scrollScreen(1000, "Welcome to TestRPG,", "Lets get you caught up!", " ");
 
 		Main.scrollScreen(500, "Mob Encounter: ", " " + entity.getName(), " - " + entity.getSubName(), " ", "Good Luck!");
 
-		System.out.println(entity.getHealth());
+		Main.waitSec();
 
-		Battle battle = new Battle(Main.player, Main.mob.getMobEntity());
+		Main.clearScreen();
+
+		Main.scrollScreen(1000, "This is the tutorial fight,", "We'll show you how it works...");
+
+		Main.waitSec();
+
+		Main.clearScreen();
+
+		TutorialBattle battle = new TutorialBattle(Main.player, entity);
 
 		battle.start();
 
 	}
 
+	public static void adventureStart() {
+
+		new Adventure(Main.player);
+
+	}
+
+
 	public static void debugMode(String name) {
 
 		if (name.equals("DebugOn")) {
+
 			while (true) {
 
 				Scanner input = new Scanner(System.in);
@@ -113,6 +141,7 @@ public class Main {
 				System.out.println("Player DamageHit Calc: " + Main.player.calcHit());
 
 			}
+
 		}
 
 		if (name.equals("DebugOn2")) {

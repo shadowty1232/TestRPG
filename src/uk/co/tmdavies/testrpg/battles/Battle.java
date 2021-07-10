@@ -1,6 +1,8 @@
-package uk.co.tmdavies.testrpg.objects;
+package uk.co.tmdavies.testrpg.battles;
 
 import uk.co.tmdavies.testrpg.Main;
+import uk.co.tmdavies.testrpg.mobs.Mob;
+import uk.co.tmdavies.testrpg.player.Player;
 
 import java.util.Scanner;
 
@@ -120,6 +122,18 @@ public class Battle {
 		if (!this.playerTurn) return;
 
 		Main.scrollScreen(500, "What do you want to do?", " ", "Hit (Deals Damage to Mob)", "Heal (Heals you for 10 HP)");
+
+	}
+
+	public static void startBattle(Player player, Mob.MobEntity entity) {
+
+		Main.scrollScreen(500, "Mob Encounter: ", " " + entity.getName(), " - " + entity.getSubName(), " ", "Good Luck!");
+
+		System.out.println(entity.getHealth());
+
+		Battle battle = new Battle(player, entity);
+
+		battle.start();
 
 	}
 

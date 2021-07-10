@@ -1,4 +1,4 @@
-package uk.co.tmdavies.testrpg.objects;
+package uk.co.tmdavies.testrpg.mobs;
 
 import java.util.Random;
 
@@ -29,7 +29,8 @@ public class Mob {
 
 	public enum MobEntity {
 
-		TEST("Test", "The Grey Texture", 20, 5, 5, 80, 10);
+		TEST("Test", "The Grey Texture", 20, 5, 5, 80, 10),
+		JOE("Joe", "That one guy", 20, 10, 5, 80, 20);
 
 		private String name;
 		private String subName;

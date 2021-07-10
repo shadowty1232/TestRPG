@@ -1,4 +1,4 @@
-package uk.co.tmdavies.testrpg.objects;
+package uk.co.tmdavies.testrpg.player;
 
 import uk.co.tmdavies.testrpg.Main;
 
@@ -8,6 +8,9 @@ public class Player {
 
 	// Player Name
 	private String name;
+
+	// Player Inventory
+	private Inventory inventory;
 
 	// Player Stats
 	private int maxHealth;
@@ -33,6 +36,8 @@ public class Player {
 
 		this.name = name;
 
+		this.inventory = new Inventory(this);
+
 		this.health = health <= 19 ? 20 : health;
 		this.maxHealth = this.health;
 
@@ -57,6 +62,12 @@ public class Player {
 	public String getName() {
 
 		return this.name;
+
+	}
+
+	public Inventory getInventory() {
+
+		return this.inventory;
 
 	}
 
@@ -99,6 +110,12 @@ public class Player {
 	public int getAccuracy() {
 
 		return this.accuracy;
+
+	}
+
+	public int getMoney() {
+
+		return this.money;
 
 	}
 
