@@ -14,11 +14,9 @@ import java.util.*;
 public class Main {
 
 	private static Player player;
-	private static Mob mob;
 	private static boolean playedBefore;
 
 	public static Config config;
-
 
 	public static void main(String[] args) {
 
@@ -32,7 +30,7 @@ public class Main {
 
 		Utils.printTitle();
 
-		Utils.scrollScreen(1000, "This game is still in testing,", "so expect errors!", " ");
+		Utils.scrollScreen(1000, "This game is still in testing,", "so expect errors!", " ", "By Tyler Davies", " ");
 
 		Scanner input = new Scanner(System.in);
 
@@ -95,8 +93,6 @@ public class Main {
 		Utils.clearScreen();
 
 		System.out.println("Loading Game...");
-
-		Main.mob = new Mob();
 
 		Utils.waitSec();
 
