@@ -1,6 +1,7 @@
 package uk.co.tmdavies.testrpg.player;
 
 import uk.co.tmdavies.testrpg.Main;
+import uk.co.tmdavies.testrpg.utils.Utils;
 
 import java.util.*;
 
@@ -41,11 +42,11 @@ public class Player {
 		this.health = health <= 19 ? 20 : health;
 		this.maxHealth = this.health;
 
-		this.strength = strength == 0 ? 10 : strength;
+		this.strength = strength <= 9 ? 10 : strength;
 		this.defence = defence == 0 ? 1 : defence;
 		this.accuracy = accuracy <= 59 ? 60 : accuracy;
 
-		this.critChance = critChance == 0 ? 10 : critChance;
+		this.critChance = critChance == 0 ? 25 : critChance;
 		this.critDamage = critDamage <= 49 ? 50 : critDamage;
 
 		this.money = 0;
@@ -119,6 +120,12 @@ public class Player {
 
 	}
 
+	public List<Equipment> getEquipments() {
+
+		return this.equips;
+
+	}
+
 	public void takeDamage(int amount) {
 
 		this.health -= amount;
@@ -146,7 +153,7 @@ public class Player {
 			this.addLevel(1);
 			this.experience = 0;
 
-			Main.scrollScreen(1000, "You have leveled up, Congratulations", "You are now Level " + this.level);
+			Utils.scrollScreen(1000, "You have leveled up, Congratulations", "You are now Level " + this.level);
 
 		}
 
@@ -253,7 +260,7 @@ public class Player {
 
 				case "health" -> this.health = 10 + equip.getBuff();
 
-				case "strength" -> this.strength = 1 + equip.getBuff();
+				case "strength" -> this.strength = 10 + equip.getBuff();
 
 				case "defence" -> this.defence = 1 + equip.getBuff();
 
@@ -266,6 +273,8 @@ public class Player {
 				default -> throw new IllegalArgumentException("Equip does not have a valid stat buff.");
 
 			}
+
+			Utils.showPlayerStats(this);
 
 			return;
 

@@ -1,5 +1,7 @@
 package uk.co.tmdavies.testrpg.mobs;
 
+import uk.co.tmdavies.testrpg.player.Player;
+
 import java.util.Random;
 
 public class Mob {
@@ -29,13 +31,14 @@ public class Mob {
 
 	public enum MobEntity {
 
-		TEST("Test", "The Grey Texture", 20, 5, 5, 80, 10),
-		JOE("Joe", "That one guy", 20, 10, 5, 80, 20);
+		JOHN("John", "That tutorial guy!", 20, 5, 5, 80, 10),
+		JOE("Joe", "That one guy.", 20, 10, 5, 80, 20);
 
 		private String name;
 		private String subName;
 
 		private int health;
+		private int maxHealth;
 		private int strength;
 		private int defence;
 		private int accuracy;
@@ -50,6 +53,7 @@ public class Mob {
 			this.subName = subName;
 
 			this.health = health;
+			this.maxHealth = health;
 			this.strength = strength;
 			this.defence = defence;
 			this.accuracy = accuracy;
@@ -73,6 +77,12 @@ public class Mob {
 		public int getHealth() {
 
 			return this.health;
+
+		}
+
+		public int getMaxHealth() {
+
+			return this.maxHealth;
 
 		}
 
@@ -100,19 +110,23 @@ public class Mob {
 
 		}
 
-		public int calcHit() {
+		public int calcHit(Player player) {
 
 			int ran = RANDOM.nextInt(100);
 
 			if (ran <= this.accuracy) {
 
-				int damage = this.damageCalc();
+				int defence = player.getDefence();
+
+				int damage = this.damageCalc() - defence;
+
+				if (damage >= -999 && damage <= 0) return -1;
 
 				return damage;
 
 			}
 
-			return -1;
+			return -1000;
 
 		}
 
@@ -132,6 +146,12 @@ public class Mob {
 		public boolean isDead() {
 
 			return this.health < 1;
+
+		}
+
+		public void reviveEntity() {
+
+			this.health = this.maxHealth;
 
 		}
 

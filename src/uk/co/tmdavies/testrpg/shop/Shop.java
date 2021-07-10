@@ -3,6 +3,7 @@ package uk.co.tmdavies.testrpg.shop;
 import uk.co.tmdavies.testrpg.Main;
 import uk.co.tmdavies.testrpg.player.Item;
 import uk.co.tmdavies.testrpg.player.Player;
+import uk.co.tmdavies.testrpg.utils.Utils;
 
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class Shop {
 
 		while (!exit) {
 
-			Main.scrollScreen(1000, "Welcome to the shop", "Please look at our wears.", " ");
+			Utils.scrollScreen(1000, "Welcome to the shop", "Please look at our wears.", " ");
 
 			HashMap<Integer, Integer> shopPrices = new HashMap<>();
 
@@ -47,7 +48,7 @@ public class Shop {
 
 			}
 
-			Main.scrollScreen(1000, " ", "Buy <number> | Exit");
+			Utils.scrollScreen(1000, " ", "Buy <number> | Exit");
 
 			String option = input.nextLine();
 
