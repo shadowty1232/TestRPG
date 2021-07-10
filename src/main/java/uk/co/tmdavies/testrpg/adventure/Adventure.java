@@ -71,6 +71,18 @@ public class Adventure {
 
 		int ran = RANDOM.nextInt(5) + 1;
 
+		System.out.println("What would you like to do? (Continue or Quit)");
+
+		String option = input.nextLine();
+
+		if (option.equalsIgnoreCase("quit")) {
+
+			player.savePlayer();
+
+			System.exit(0);
+
+		}
+
 		procrastinate();
 
 		switch(ran) {

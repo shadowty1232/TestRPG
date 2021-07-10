@@ -223,6 +223,7 @@ public class Player {
 
 	}
 
+
 	public void removeEquip(Equipment equip) {
 
 		if (this.equips.contains(equip)) {
@@ -234,6 +235,12 @@ public class Player {
 			throw new IllegalArgumentException("Player does not have that equipment.");
 
 		}
+
+	}
+
+	public void setEquip(List<Equipment> equips) {
+
+		this.equips = equips;
 
 	}
 
@@ -294,6 +301,24 @@ public class Player {
 		statMap.put("Critical Damage", this.critDamage + "%");
 
 		return statMap;
+
+	}
+
+	public void savePlayer() {
+
+		Main.config.getConfig().createSection("PlayerData");
+
+		Main.config.set("PlayerData." + this.name + ".Heath", this.health);
+		Main.config.set("PlayerData." + this.name + ".Strength", this.strength);
+		Main.config.set("PlayerData." + this.name + ".Defence", this.defence);
+		Main.config.set("PlayerData." + this.name + ".Accuracy", this.accuracy);
+		Main.config.set("PlayerData." + this.name + ".CritChance", this.critChance);
+		Main.config.set("PlayerData." + this.name + ".CritDamage", this.critDamage);
+
+		Main.config.set("PlayerData." + this.name + ".Inventory", this.inventory.inventory);
+		Main.config.set("PlayerData." + this.name + ".Equipment", this.equips);
+
+		Main.config.saveConfig();
 
 	}
 

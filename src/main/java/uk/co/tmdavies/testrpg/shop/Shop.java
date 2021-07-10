@@ -1,6 +1,5 @@
 package uk.co.tmdavies.testrpg.shop;
 
-import uk.co.tmdavies.testrpg.Main;
 import uk.co.tmdavies.testrpg.player.Item;
 import uk.co.tmdavies.testrpg.player.Player;
 import uk.co.tmdavies.testrpg.utils.Utils;

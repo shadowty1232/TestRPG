@@ -1,6 +1,5 @@
 package uk.co.tmdavies.testrpg.utils;
 
-import uk.co.tmdavies.testrpg.Main;
 import uk.co.tmdavies.testrpg.player.Player;
 
 import java.util.ArrayList;

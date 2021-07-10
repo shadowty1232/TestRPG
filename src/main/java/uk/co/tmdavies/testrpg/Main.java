@@ -1,9 +1,12 @@
 package uk.co.tmdavies.testrpg;
 
+import org.bspfsystems.yamlconfiguration.configuration.ConfigurationSection;
 import uk.co.tmdavies.testrpg.adventure.Adventure;
 import uk.co.tmdavies.testrpg.battles.TutorialBattle;
 import uk.co.tmdavies.testrpg.mobs.Mob;
+import uk.co.tmdavies.testrpg.player.Item;
 import uk.co.tmdavies.testrpg.player.Player;
+import uk.co.tmdavies.testrpg.utils.Config;
 import uk.co.tmdavies.testrpg.utils.Utils;
 
 import java.util.*;
@@ -11,9 +14,15 @@ import java.util.*;
 public class Main {
 
 	private static Player player;
-	public static Mob mob;
+	private static Mob mob;
+	private static boolean playedBefore;
+
+	public static Config config;
+
 
 	public static void main(String[] args) {
+
+		Main.config = new Config("config");
 
 		Utils.clearScreen();
 
@@ -26,9 +35,42 @@ public class Main {
 
 		Utils.clearScreen();
 
-		System.out.println("Creating Player...");
+		if (Main.config.getConfig().getConfigurationSection("PlayerData." + name) != null) {
 
-		Main.player = new Player(name, 20, 10, 1, 50, 25, 1);
+			Utils.clearScreen();
+
+			System.out.println("Found existing data with that name... Loading Player Data...");
+
+			ConfigurationSection section = Main.config.getConfig().getConfigurationSection("PlayerData." + name);
+
+			Main.player = new Player(section.getName(), section.getInt("Health"), section.getInt("Strength"),
+					section.getInt("Strength"), section.getInt("Accuracy"), section.getInt("CritChance"), section.getInt("CritDamage"));
+
+			List<Item> items = (List<Item>) section.getList("Inventory");
+
+			Main.player.getInventory().setInventory(items);
+
+			List<Player.Equipment> equips = (List<Player.Equipment>) section.getList("Equipment");
+
+			Main.player.setEquip(equips);
+
+			Main.playedBefore = true;
+
+			Utils.waitSec();
+
+			System.out.println("Loaded!");
+
+		} else {
+
+			System.out.println("Creating Player...");
+
+			Main.player = new Player(name, 20, 10, 1, 50, 25, 1);
+
+			Main.player.savePlayer();
+
+			Main.playedBefore = false;
+
+		}
 
 		Utils.waitSec();
 
@@ -39,6 +81,8 @@ public class Main {
 		Utils.scrollScreen(500, "Player Name: " + Main.player.getName());
 
 		Utils.showPlayerStats(Main.player);
+
+		System.out.println(Main.config.getConfig().getCurrentPath());
 
 		Utils.waitSec();
 
@@ -52,7 +96,7 @@ public class Main {
 
 		Utils.clearScreen();
 
-		Main.startTutorial();
+		if (!Main.playedBefore) Main.startTutorial();
 
 		new Adventure(Main.player).startAdventure();
 

@@ -47,4 +47,10 @@ public class Inventory {
 
 	}
 
+	public void setInventory(List<Item> items) {
+
+		this.inventory = items;
+
+	}
+
 }
