@@ -60,4 +60,18 @@ public class Utils {
 
 	}
 
+	public static void printTitle() {
+
+		// https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+		// Small Slant
+
+		System.out.println(" ");
+		System.out.println(" _______________________  ___  _____");
+		System.out.println("/_  __/ __/ __/_  __/ _ \\/ _ \\/ ___/");
+		System.out.println(" / / / _/_\\ \\  / / / , _/ ___/ (_ / ");
+		System.out.println("/_/ /___/___/ /_/ /_/|_/_/   \\___/  ");
+		System.out.println(" ");
+
+	}
+
 }

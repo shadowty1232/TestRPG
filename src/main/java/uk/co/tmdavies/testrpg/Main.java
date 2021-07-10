@@ -26,7 +26,13 @@ public class Main {
 
 		Utils.clearScreen();
 
-		Utils.scrollScreen(1000, "Welcome to the TestRPG", "This game is still in testing,", "so expect errors!", " ");
+		System.out.println("Welcome to");
+
+		Utils.waitSec();
+
+		Utils.printTitle();
+
+		Utils.scrollScreen(1000, "This game is still in testing,", "so expect errors!", " ");
 
 		Scanner input = new Scanner(System.in);
 
