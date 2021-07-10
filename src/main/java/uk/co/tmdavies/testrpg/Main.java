@@ -98,6 +98,8 @@ public class Main {
 
 		Utils.clearScreen();
 
+		// Fix Battle Bug - Repeating Battle After Death (HP Bug?)
+
 		if (!Main.playedBefore) Main.startTutorial();
 
 		new Adventure(Main.player).startAdventure();

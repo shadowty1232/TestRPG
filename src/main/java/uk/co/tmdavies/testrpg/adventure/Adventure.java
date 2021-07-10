@@ -226,7 +226,6 @@ public class Adventure {
 
 		}
 
-
 	}
 
 	public void enterShop() {
